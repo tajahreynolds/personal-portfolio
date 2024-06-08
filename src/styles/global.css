@@ -1,6 +1,6 @@
 :root {
-  --accent: 136, 58, 234;
-  --accent-light: 224, 204, 250;
+  --accent: 255, 151, 118;
+  --accent-light: 255, 219, 118;
   --accent-dark: 49, 10, 101;
   --accent-gradient: linear-gradient(
     45deg,

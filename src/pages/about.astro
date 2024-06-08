@@ -1,8 +1,14 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import Card from '../components/Card.astro';
 import '../styles/global.css'
 ---
 
 <BaseLayout pageTitle="A bit about myself.">
 	<h1>Hey there, I'm <span class="text-gradient">TaJah</span></h1>
+	<Card
+		title='web design'
+		href="https://luke-cooper-prototype.web.app/"
+		body="elevate your website, hand crafted, blazing fast"
+	/>
 </BaseLayout>
