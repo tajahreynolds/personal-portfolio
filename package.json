@@ -1,5 +1,5 @@
 {
-  "name": "personal-portfolio",
+  "name": "",
   "type": "module",
   "version": "0.0.1",
   "scripts": {
@@ -10,7 +10,7 @@
     "astro": "astro"
   },
   "dependencies": {
-    "astro": "^4.10.0",
+    "astro": "^4.10.1",
     "@astrojs/check": "^0.7.0",
     "typescript": "^5.4.5"
   }
