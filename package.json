@@ -3,9 +3,25 @@
     "@types/bun": "latest"
   },
   "scripts": {
-    "dev": "bun --hot run src/index.ts"
+    "dev": "bun --hot run src/server.tsx",
+    "clean": "rm -R node_modules && bun install",
+    "build": "bun build ./src/server.tsx --outdir ./build",
+    "start": "NODE_ENV=production bun build/index.js",
+    "test": "bun test"
   },
   "dependencies": {
-    "hono": "^4.4.4"
+    "@hono/zod-validator": "^0.2.2",
+    "@vercel/speed-insights": "^1.0.11",
+    "bun-types": "^1.1.12",
+    "hono": "^4.4.4",
+    "htmx.org": "^1.9.12",
+    "typed-htmx": "^0.3.1",
+    "zod": "^3.23.8"
+  },
+  "name": "personal-portfolio",
+  "module": "index.ts",
+  "type": "module",
+  "peerDependencies": {
+    "typescript": "^5.0.0"
   }
 }

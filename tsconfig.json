@@ -1,7 +1,30 @@
 {
   "compilerOptions": {
-    "strict": true,
+    "baseUrl": "./src",
+    // enable latest features
+    "lib": ["ESNext", "DOM"],
+    "target": "ESNext",
+    "module": "ESNext",
+    "moduleDetection": "force",
     "jsx": "react-jsx",
-    "jsxImportSource": "hono/jsx"
+    "allowJs": true,
+
+    // bundler mode
+    "moduleResolution": "Bundler",
+    "allowImportingTsExtensions": true,
+    "verbatimModuleSyntax": true,
+    "noEmit": true,
+    "jsxImportSource": "typed-htmx/typed-html",
+    "types": ["typed-htmx"],
+
+    // best practices
+    "strict": true,
+    "skipLibCheck": true,
+    "noFallthroughCasesInSwitch": true,
+
+    // strict flags
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noPropertyAccessFromIndexSignature": true
   }
 }

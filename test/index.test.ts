@@ -1,5 +1,5 @@
 import { describe, it, expect } from "bun:test";
-import app from "../src/index"
+import app from "server"
 
 describe('Portfolio', () => {
     it('responds', async () => {
