@@ -1,17 +1,11 @@
 {
-  "name": "personal-portfolio",
-  "type": "module",
-  "version": "0.0.1",
+  "devDependencies": {
+    "@types/bun": "latest"
+  },
   "scripts": {
-    "dev": "astro dev",
-    "start": "astro dev",
-    "build": "astro check && astro build",
-    "preview": "astro preview",
-    "astro": "astro"
+    "dev": "bun --hot run src/index.ts"
   },
   "dependencies": {
-    "astro": "^4.10.0",
-    "@astrojs/check": "^0.7.0",
-    "typescript": "^5.4.5"
+    "hono": "^4.4.4"
   }
 }
