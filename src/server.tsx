@@ -22,6 +22,7 @@ server.onError((err, c) => {
 
 // todo add terminal style interaction, support mouse and keyboard
 console.log(`Starting server on port ${port || 3000}`);
+export const app = server;
 export type AppType = typeof server;
 export default {
   port,

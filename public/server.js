@@ -1829,10 +1829,12 @@ server.onError((err, c) => {
   return c.html("you really hate to see it");
 });
 console.log(`Starting server on port ${port || 3000}`);
+var app = server;
 var server_default = {
   port,
   fetch: server.fetch
 };
 export {
-  server_default as default
+  server_default as default,
+  app
 };
