@@ -1,12 +1,12 @@
 {
   "name": "personal-portfolio",
-  "module": "./src/server.tsx",
+  "module": "./src/index.ts",
   "type": "module",
   "scripts": {
-    "dev": "bun --hot run src/server.tsx",
+    "dev": "bun --hot run src/index.ts",
     "clean": "rm -R node_modules && bun install",
-    "build": "bun run build.ts && bun build src/server.tsx --outdir ./public",
-    "start": "NODE_ENV=production bun public/server.js",
+    "build": "bun run build.ts && bun build src/index.ts --outdir ./public",
+    "start": "NODE_ENV=production bun public/index.js",
     "test": "bun test"
   },
   "devDependencies": {

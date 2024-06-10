@@ -1613,6 +1613,11 @@ var Hono2 = class extends Hono {
   }
 };
 
+// node_modules/hono/dist/adapter/vercel/handler.js
+var handle = (app) => (req, requestContext) => {
+  return app.fetch(req, {}, requestContext);
+};
+
 // node_modules/hono/dist/utils/color.js
 var getColorEnabled = function() {
   const { process, Deno } = globalThis;
@@ -1674,7 +1679,7 @@ var Factory = class {
   };
   createMiddleware = (middleware) => middleware;
   createHandlers = (...handlers) => {
-    return handlers.filter((handler) => handler !== undefined);
+    return handlers.filter((handler2) => handler2 !== undefined);
   };
 };
 var createFactory = (init) => new Factory(init);
@@ -1691,14 +1696,6 @@ var jsxConfig = {
 };
 
 // node_modules/typed-htmx/dist/esm/typed-html/jsx-runtime.js
-function Fragment({ children }) {
-  if (Array.isArray(children)) {
-    const elts = children.map(sanitizer);
-    return jsxConfig.trusted ? elts.join("\n") : new Node3(elts);
-  }
-  const elt = sanitizer(children);
-  return jsxConfig.trusted ? elt : new Node3(elt);
-}
 var sanitizer = function(value) {
   const str = value || value === 0 ? value.toString() : "";
   if (!jsxConfig.sanitize || jsxConfig.trusted)
@@ -1750,8 +1747,8 @@ function jsxDEV(tag, props, _key, _isStatic, source, _self) {
   }
 }
 
-// src/middlewares/injectHtmx.tsx
-var injectHtmx = createMiddleware(async (c, next) => {
+// src/middlewares/setLayout.tsx
+var setLayout = createMiddleware(async (c, next) => {
   c.setRenderer((content) => {
     return c.html(jsxDEV("html", {
       children: [
@@ -1764,7 +1761,6 @@ var injectHtmx = createMiddleware(async (c, next) => {
         }, undefined, false, undefined, this),
         jsxDEV("body", {
           children: jsxDEV("main", {
-            "hx-boost": "true",
             children: content
           }, undefined, false, undefined, this)
         }, undefined, false, undefined, this)
@@ -1774,67 +1770,48 @@ var injectHtmx = createMiddleware(async (c, next) => {
   await next();
 });
 
-// src/pages/HomePage.tsx
-var HomePage_default = () => {
-  return jsxDEV(Fragment, {
-    children: [
-      jsxDEV("h1", {
-        children: "Home Page"
-      }, undefined, false, undefined, this),
-      jsxDEV("a", {
-        href: "/about",
-        children: "About Page"
-      }, undefined, false, undefined, this)
-    ]
-  }, undefined, true, undefined, this);
-};
-
 // src/handlers/home.tsx
 var home = new Hono2;
-home.get((c) => c.render(jsxDEV(HomePage_default, {}, undefined, false, undefined, this)));
+home.get((c) => {
+  return c.render(jsxDEV("h1", {
+    children: "yo"
+  }, undefined, false, undefined, this));
+});
 var home_default = home;
-
-// src/pages/AboutPage.tsx
-var AboutPage_default = () => {
-  return jsxDEV(Fragment, {
-    children: [
-      jsxDEV("h1", {
-        children: "About Page"
-      }, undefined, false, undefined, this),
-      jsxDEV("a", {
-        href: "/",
-        children: "Home Page"
-      }, undefined, false, undefined, this)
-    ]
-  }, undefined, true, undefined, this);
-};
 
 // src/handlers/about.tsx
 var about = new Hono2;
-about.get("/", (c) => c.render(jsxDEV(AboutPage_default, {}, undefined, false, undefined, this)));
+about.get("/", (c) => c.render(jsxDEV("h1", {
+  children: "yoo"
+}, undefined, false, undefined, this)));
 var about_default = about;
 
-// src/server.tsx
-var server = new Hono2;
+// src/index.ts
+var hono3 = new Hono2;
 var port = 3000;
-server.use(logger());
-server.use(injectHtmx);
-server.route("/", home_default);
-server.route("/about", about_default);
-server.notFound((c) => {
-  return c.html("page not found");
+hono3.use(logger());
+hono3.use(setLayout);
+hono3.route("/", home_default);
+hono3.route("/about", about_default);
+hono3.notFound((c) => {
+  return c.html("page not found", 404);
 });
-server.onError((err, c) => {
+hono3.onError((err, c) => {
   console.error(`${err}`);
   return c.html("you really hate to see it");
 });
 console.log(`Starting server on port ${port || 3000}`);
-var app = server;
-var server_default = {
+var runtime = "edge";
+var GET = handle(hono3);
+var POST = handle(hono3);
+var src_default = {
+  app: hono3,
   port,
-  fetch: server.fetch
+  fetch: hono3.fetch
 };
 export {
-  server_default as default,
-  app
+  runtime,
+  src_default as default,
+  POST,
+  GET
 };

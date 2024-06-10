@@ -1,6 +1,7 @@
-import { app } from "server";
+import http from "index";
 import { toSSG } from "hono/bun";
 
-toSSG(app, {
-    dir: "./public"
+// generate static site from reigstered routes
+toSSG(http.app, {
+  dir: "./public",
 });

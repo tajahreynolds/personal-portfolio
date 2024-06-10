@@ -1,7 +1,6 @@
 import { createMiddleware } from "hono/factory";
-// import { html } from 'hono/html';
 
-export const injectHtmx = createMiddleware(async (c, next) => {
+export const setLayout = createMiddleware(async (c, next) => {
   c.setRenderer((content) => {
     return c.html(
       <html>
@@ -13,7 +12,7 @@ export const injectHtmx = createMiddleware(async (c, next) => {
           ></script>
         </head>
         <body>
-            <main hx-boost="true">{content}</main>
+            <main>{content}</main>
         </body>
       </html>
     );

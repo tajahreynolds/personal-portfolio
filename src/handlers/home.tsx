@@ -1,9 +1,10 @@
 import { Hono } from "hono";
-import HomePage from "pages/HomePage";
 
 const home = new Hono();
 
 //GET /
-home.get((c) => c.render(<HomePage />));
+home.get((c) => {
+    return c.render(<h1>yo</h1>)
+});
 
 export default home;
