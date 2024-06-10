@@ -1753,12 +1753,18 @@ var setLayout = createMiddleware(async (c, next) => {
     return c.html(jsxDEV("html", {
       children: [
         jsxDEV("head", {
-          children: jsxDEV("script", {
-            src: "https://unpkg.com/htmx.org@1.9.12",
-            integrity: "sha384-ujb1lZYygJmzgSwoxRggbCHcjc0rB2XoQrxeTUQyRjrOnlCoYta87iKBWq3EsdM2",
-            crossorigin: "anonymous"
-          }, undefined, false, undefined, this)
-        }, undefined, false, undefined, this),
+          children: [
+            jsxDEV("script", {
+              src: "https://unpkg.com/htmx.org@1.9.12",
+              integrity: "sha384-ujb1lZYygJmzgSwoxRggbCHcjc0rB2XoQrxeTUQyRjrOnlCoYta87iKBWq3EsdM2",
+              crossorigin: "anonymous"
+            }, undefined, false, undefined, this),
+            jsxDEV("script", {
+              type: "module",
+              src: "/index.js"
+            }, undefined, false, undefined, this)
+          ]
+        }, undefined, true, undefined, this),
         jsxDEV("body", {
           children: jsxDEV("main", {
             children: content

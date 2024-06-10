@@ -10,6 +10,7 @@ export const setLayout = createMiddleware(async (c, next) => {
             integrity="sha384-ujb1lZYygJmzgSwoxRggbCHcjc0rB2XoQrxeTUQyRjrOnlCoYta87iKBWq3EsdM2"
             crossorigin="anonymous"
           ></script>
+          <script type="module" src="/index.js"></script>
         </head>
         <body>
             <main>{content}</main>

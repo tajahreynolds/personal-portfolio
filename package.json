@@ -5,8 +5,8 @@
   "scripts": {
     "dev": "bun --hot run src/index.ts",
     "clean": "rm -R node_modules && bun install",
-    "build": "bun run build.ts && bun build src/index.ts --outdir ./public",
-    "start": "NODE_ENV=production bun public/index.js",
+    "build": "bun run build.ts && bun build --entrypoints src/index.ts --outdir ./build --target browser",
+    "start": "bun run build && NODE_ENV=production bunx serve build",
     "test": "bun test"
   },
   "devDependencies": {
