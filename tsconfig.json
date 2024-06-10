@@ -14,8 +14,6 @@
     "allowImportingTsExtensions": true,
     "verbatimModuleSyntax": true,
     "noEmit": true,
-    "jsxImportSource": "typed-htmx/typed-html",
-    "types": ["typed-htmx"],
 
     // best practices
     "strict": true,
@@ -25,6 +23,10 @@
     // strict flags
     "noUnusedLocals": true,
     "noUnusedParameters": true,
-    "noPropertyAccessFromIndexSignature": true
+    "noPropertyAccessFromIndexSignature": true,
+
+    // typed html for htmx types
+    "jsxImportSource": "typed-htmx/typed-html",
+    "types": ["typed-htmx"],
   }
 }

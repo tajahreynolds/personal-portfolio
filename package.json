@@ -1,13 +1,16 @@
 {
-  "devDependencies": {
-    "@types/bun": "latest"
-  },
+  "name": "personal-portfolio",
+  "module": "./src/server.tsx",
+  "type": "module",
   "scripts": {
     "dev": "bun --hot run src/server.tsx",
     "clean": "rm -R node_modules && bun install",
     "build": "bun build ./src/server.tsx --outdir ./build",
     "start": "NODE_ENV=production bun build/index.js",
     "test": "bun test"
+  },
+  "devDependencies": {
+    "@types/bun": "latest"
   },
   "dependencies": {
     "@hono/zod-validator": "^0.2.2",
@@ -18,9 +21,6 @@
     "typed-htmx": "^0.3.1",
     "zod": "^3.23.8"
   },
-  "name": "personal-portfolio",
-  "module": "index.ts",
-  "type": "module",
   "peerDependencies": {
     "typescript": "^5.0.0"
   }

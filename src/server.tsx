@@ -1,24 +1,29 @@
 import { Hono } from "hono";
 import { logger } from "hono/logger";
-import { applyRootLayout } from "middlewares/applyRootLayout";
-import home from "controllers/home";
-import about from "controllers/about";
+// import { applyRootLayout } from "middlewares/applyRootLayout";
+import { injectHtmx } from "middlewares/injectHtmx";
+import home from "handlers/home";
+import about from "handlers/about";
 
-const app = new Hono();
-
-app.use(logger());
-app.use(applyRootLayout);
-app.get("/", (c) =>
-  c.render(
-    <div hx-get="/about" hx-swap="outerHTML">
-      click it up
-    </div>
-  )
-);
-app.route("/home", home);
-app.route("/about", about);
+const server = new Hono();
+const port = 3000;
+server.use(logger());
+server.use(injectHtmx);
+// app.use(applyRootLayout);
+server.route("/", home);
+server.route("/about", about);
+server.notFound((c) => {
+  return c.html("page not found");
+});
+server.onError((err, c) => {
+  console.error(`${err}`);
+  return c.html("you really hate to see it");
+});
 
 // todo add terminal style interaction, support mouse and keyboard
-
-export type AppType = typeof app;
-export default app;
+console.log(`Starting server on port ${port || 3000}`);
+export type AppType = typeof server;
+export default {
+  port,
+  fetch: server.fetch,
+};
