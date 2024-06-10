@@ -3,5 +3,5 @@ import { toSSG } from "hono/bun";
 
 // generate static site from reigstered routes
 toSSG(http.app, {
-  dir: "./public",
+  dir: "./build",
 });
