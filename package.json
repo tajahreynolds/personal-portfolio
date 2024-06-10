@@ -5,8 +5,8 @@
   "scripts": {
     "dev": "bun --hot run src/server.tsx",
     "clean": "rm -R node_modules && bun install",
-    "build": "bun build ./src/server.tsx --outdir ./public",
-    "start": "NODE_ENV=production bun public/index.js",
+    "build": "bun build src/server.tsx --outdir ./public",
+    "start": "NODE_ENV=production bun public/server.js",
     "test": "bun test"
   },
   "devDependencies": {
