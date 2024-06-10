@@ -1,4 +1,5 @@
 import { Hono } from "hono";
+import { handle } from "hono/vercel";
 import { logger } from "hono/logger";
 // import { applyRootLayout } from "middlewares/applyRootLayout";
 import { injectHtmx } from "middlewares/injectHtmx";
@@ -24,7 +25,4 @@ server.onError((err, c) => {
 console.log(`Starting server on port ${port || 3000}`);
 export const app = server;
 export type AppType = typeof server;
-export default {
-  port,
-  fetch: server.fetch,
-};
+export default handle(server);
