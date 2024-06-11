@@ -1747,26 +1747,38 @@ function jsxDEV(tag, props, _key, _isStatic, source, _self) {
   }
 }
 
-// src/middlewares/setLayout.tsx
-var setLayout = createMiddleware(async (c, next) => {
-  c.setRenderer((content) => {
+// src/middlewares/LayoutRenderer.tsx
+var LayoutRenderer = createMiddleware(async (c, next) => {
+  c.setRenderer((content, { pageTitle }) => {
     return c.html(jsxDEV("html", {
+      lang: "en",
       children: [
         jsxDEV("head", {
           children: [
+            jsxDEV("title", {
+              children: [
+                pageTitle,
+                " | TaJah Tech"
+              ]
+            }, undefined, true, undefined, this),
+            jsxDEV("meta", {
+              name: "viewport",
+              content: "width=device-width, initial-scale=1"
+            }, undefined, false, undefined, this),
+            jsxDEV("meta", {
+              name: "description",
+              content: "TaJah's Technical Portfolio"
+            }, undefined, false, undefined, this),
             jsxDEV("script", {
               src: "https://unpkg.com/htmx.org@1.9.12",
               integrity: "sha384-ujb1lZYygJmzgSwoxRggbCHcjc0rB2XoQrxeTUQyRjrOnlCoYta87iKBWq3EsdM2",
               crossorigin: "anonymous"
-            }, undefined, false, undefined, this),
-            jsxDEV("script", {
-              type: "module",
-              src: "/index.js"
             }, undefined, false, undefined, this)
           ]
         }, undefined, true, undefined, this),
         jsxDEV("body", {
           children: jsxDEV("main", {
+            id: "root",
             children: content
           }, undefined, false, undefined, this)
         }, undefined, false, undefined, this)
@@ -1779,24 +1791,57 @@ var setLayout = createMiddleware(async (c, next) => {
 // src/handlers/home.tsx
 var home = new Hono2;
 home.get((c) => {
-  return c.render(jsxDEV("h1", {
-    children: "yo"
-  }, undefined, false, undefined, this));
+  c.set("pageTitle", "Home");
+  return c.render(jsxDEV("div", {
+    children: [
+      jsxDEV("h1", {
+        children: "TaJah Tech Portfolio"
+      }, undefined, false, undefined, this),
+      jsxDEV("div", {
+        children: [
+          jsxDEV("h2", {
+            "hx-get": "/about",
+            "hx-target": "#root",
+            "hx-push-url": "true",
+            children: "About"
+          }, undefined, false, undefined, this),
+          jsxDEV("p", {
+            children: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Modi, asperiores nostrum. Asperiores quasi eveniet aspernatur nesciunt omnis numquam labore adipisci saepe maxime, magni velit blanditiis magnam error laborum obcaecati nobis."
+          }, undefined, false, undefined, this)
+        ]
+      }, undefined, true, undefined, this),
+      jsxDEV("div", {
+        children: [
+          jsxDEV("h2", {
+            children: "Projects"
+          }, undefined, false, undefined, this),
+          jsxDEV("p", {
+            children: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Laboriosam in consequatur, quos aliquid voluptate dicta quibusdam eaque porro odio explicabo aspernatur corrupti alias labore placeat iure voluptatum provident dolorem similique."
+          }, undefined, false, undefined, this)
+        ]
+      }, undefined, true, undefined, this)
+    ]
+  }, undefined, true, undefined, this), {
+    pageTitle: "Home"
+  });
 });
 var home_default = home;
 
 // src/handlers/about.tsx
 var about = new Hono2;
-about.get("/", (c) => c.render(jsxDEV("h1", {
-  children: "yoo"
-}, undefined, false, undefined, this)));
+about.get("/", (c) => {
+  c.set("pageTitle", "About");
+  return c.render(jsxDEV("h1", {
+    children: "yoo"
+  }, undefined, false, undefined, this), { pageTitle: "About" });
+});
 var about_default = about;
 
 // src/index.ts
 var hono3 = new Hono2;
 var port = 3000;
 hono3.use(logger());
-hono3.use(setLayout);
+hono3.use(LayoutRenderer);
 hono3.route("/", home_default);
 hono3.route("/about", about_default);
 hono3.notFound((c) => {
@@ -1811,12 +1856,12 @@ var runtime = "edge";
 var GET = handle(hono3);
 var POST = handle(hono3);
 var src_default = {
-  app: hono3,
   port,
   fetch: hono3.fetch
 };
 export {
   runtime,
+  hono3 as hono,
   src_default as default,
   POST,
   GET

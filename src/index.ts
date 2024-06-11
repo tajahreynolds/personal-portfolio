@@ -1,20 +1,23 @@
 import { Hono } from "hono";
 import { handle } from "hono/vercel";
 import { logger } from "hono/logger";
-import { setLayout } from "middlewares/setLayout";
+import { LayoutRenderer } from "middlewares/LayoutRenderer";
 import HomePageHandler from "handlers/home";
 import AboutPageHandler from "handlers/about";
+import { html } from "hono/html";
+import { serveStatic } from "hono/bun";
 
-const hono = new Hono();
+export const hono = new Hono();
 const port = 3000;
 
 // apply middleware
 hono.use(logger());
-hono.use(setLayout);
+hono.use(LayoutRenderer);
 
 // setup routes
 hono.route("/", HomePageHandler);
 hono.route("/about", AboutPageHandler);
+hono.get("/robots.txt", serveStatic({ path: "./robots.txt"}));
 
 // setup fallbacks
 hono.notFound((c) => {
@@ -35,7 +38,6 @@ export const POST = handle(hono);
 
 // bun needs this to run http server
 export default {
-  app: hono,
   port: port,
   fetch: hono.fetch,
-}
+};
