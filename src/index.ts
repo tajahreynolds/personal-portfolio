@@ -4,7 +4,6 @@ import { logger } from "hono/logger";
 import { LayoutRenderer } from "middlewares/LayoutRenderer";
 import HomePageHandler from "handlers/home";
 import AboutPageHandler from "handlers/about";
-import { html } from "hono/html";
 import { serveStatic } from "hono/bun";
 
 export const hono = new Hono();
