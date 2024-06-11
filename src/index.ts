@@ -3,7 +3,6 @@ import { handle } from "hono/vercel";
 import { logger } from "hono/logger";
 import { LayoutRenderer } from "middlewares/LayoutRenderer";
 import HomePageHandler from "handlers/home";
-import AboutPageHandler from "handlers/about";
 import { serveStatic } from "hono/bun";
 
 export const hono = new Hono();
@@ -15,7 +14,6 @@ hono.use(LayoutRenderer);
 
 // setup routes
 hono.route("/", HomePageHandler);
-hono.route("/about", AboutPageHandler);
 hono.get("/robots.txt", serveStatic({ path: "./robots.txt"}));
 
 // setup fallbacks
