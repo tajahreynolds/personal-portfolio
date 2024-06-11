@@ -1,17 +1,27 @@
 {
   "name": "personal-portfolio",
+  "module": "./src/index.ts",
   "type": "module",
-  "version": "0.0.1",
   "scripts": {
-    "dev": "astro dev",
-    "start": "astro dev",
-    "build": "astro check && astro build",
-    "preview": "astro preview",
-    "astro": "astro"
+    "dev": "bun --hot run src/index.ts",
+    "clean": "rm -R node_modules && bun install",
+    "build": "bun run build.ts && bun build --entrypoints src/index.ts --outdir ./build --target browser",
+    "start": "NODE_ENV=production bunx serve build",
+    "test": "bun test"
+  },
+  "devDependencies": {
+    "@types/bun": "latest"
   },
   "dependencies": {
-    "astro": "^4.10.0",
-    "@astrojs/check": "^0.7.0",
-    "typescript": "^5.4.5"
+    "@hono/zod-validator": "^0.2.2",
+    "@vercel/speed-insights": "^1.0.11",
+    "bun-types": "^1.1.12",
+    "hono": "^4.4.4",
+    "htmx.org": "^1.9.12",
+    "typed-htmx": "^0.3.1",
+    "zod": "^3.23.8"
+  },
+  "peerDependencies": {
+    "typescript": "^5.0.0"
   }
 }
