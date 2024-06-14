@@ -27,6 +27,6 @@
 
     // typed html for htmx types
     "jsxImportSource": "typed-htmx/typed-html",
-    "types": ["typed-htmx"],
+    "types": ["typed-htmx", "Bun"],
   }
 }
