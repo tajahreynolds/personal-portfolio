@@ -1,20 +1,21 @@
 import { Hono } from "hono";
 import { handle } from "hono/vercel";
 import { logger } from "hono/logger";
+import { home } from "handlers/home";
 import { LayoutRenderer } from "middlewares/LayoutRenderer";
-import HomePageHandler from "handlers/home";
 import { serveStatic } from "hono/bun";
 
 export const hono = new Hono();
-const port = 3000;
+const port = parseInt(Bun.env["PORT"]!) || 3000;
 
 // apply middleware
 hono.use(logger());
 hono.use(LayoutRenderer);
+hono.use("/styles/*", serveStatic({root: "static/"}));
 
 // setup routes
-hono.route("/", HomePageHandler);
-hono.get("/robots.txt", serveStatic({ path: "./robots.txt"}));
+hono.route("/", home);
+hono.get("/robots.txt", serveStatic({path: "static/robots.txt"}));
 
 // setup fallbacks
 hono.notFound((c) => {
@@ -35,6 +36,6 @@ export const POST = handle(hono);
 
 // bun needs this to run http server
 export default {
-  port: port,
+  port,
   fetch: hono.fetch,
 };
