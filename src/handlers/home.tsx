@@ -1,6 +1,6 @@
 import { Hono } from "hono";
-import Navbar from "../components/Navbar";
 import Hero from "components/Hero";
+import Projects from "components/Projects";
 
 export const home = new Hono<Env>();
 
@@ -8,8 +8,8 @@ export const home = new Hono<Env>();
 home.get((c) => {
   return c.render(
     <>
-      <Navbar />
       <Hero />
+      <Projects />
     </>,
     {
       pageTitle: "Home",
@@ -20,7 +20,6 @@ home.get((c) => {
 home.get("/about", (c) => {
 	return c.render(
 		<>
-			<Navbar />
 			<h1>yoo</h1>
 		</>,
 		{ pageTitle: "About" }
