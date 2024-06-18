@@ -28,14 +28,19 @@ nav > a {
     /* height: 80vh;  */
 }
 
-#projects {
+#projectContainer {
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
-#project {
+.project {
     width: 80%;
+}
+
+.project:hover {
+    transform: scale(1.1);
+    cursor: pointer;
 }
 
 @media only screen and (min-width: 768px) {
@@ -43,7 +48,7 @@ nav > a {
         margin: 0px auto;
     }
     nav {
-        width: 50%;
+        width: 718px;
         display: flex;
         justify-content: space-between;
         align-items: center;
@@ -54,9 +59,9 @@ nav > a {
     main {
         width: 768px;
         margin: auto;
+        margin-top: 34px;
     }
-
-    nav {
-        width: 718px;
+    #navContainer {
+        position: absolute;
     }
 }

@@ -2,6 +2,7 @@ import { Hono } from "hono";
 import { handle } from "hono/vercel";
 import { logger } from "hono/logger";
 import { home } from "handlers/home";
+import { projects } from "handlers/projects";
 import { LayoutRenderer } from "middlewares/LayoutRenderer";
 import { serveStatic } from "hono/bun";
 
@@ -11,11 +12,13 @@ const port = parseInt(Bun.env["PORT"]!) || 3000;
 // apply middleware
 hono.use(logger());
 hono.use(LayoutRenderer);
-hono.use("/styles/*", serveStatic({root: "static/"}));
+hono.use("/styles/*", serveStatic({ root: "static/" }));
 
 // setup routes
 hono.route("/", home);
-hono.get("/robots.txt", serveStatic({path: "static/robots.txt"}));
+hono.route("/projects", projects);
+
+hono.get("/robots.txt", serveStatic({ path: "static/robots.txt" }));
 
 // setup fallbacks
 hono.notFound((c) => {

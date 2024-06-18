@@ -1,7 +1,11 @@
-export default function () {
+interface HeroProps {
+  header: string;
+}
+
+export default function ({ header }: HeroProps) {
   return (
     <div class="hero">
-      <h1>Turning Ideas into Reality</h1>
+      <h1>{header}</h1>
     </div>
   );
 }

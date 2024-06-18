@@ -8,7 +8,7 @@ export const home = new Hono<Env>();
 home.get((c) => {
   return c.render(
     <>
-      <Hero />
+      <Hero header="Turning Ideas into Reality" />
       <Projects />
     </>,
     {
@@ -18,10 +18,10 @@ home.get((c) => {
 });
 
 home.get("/about", (c) => {
-	return c.render(
-		<>
-			<h1>yoo</h1>
-		</>,
-		{ pageTitle: "About" }
-	);
+  return c.render(
+    <>
+      <h1>yoo</h1>
+    </>,
+    { pageTitle: "About" }
+  );
 });

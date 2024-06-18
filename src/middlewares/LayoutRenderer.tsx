@@ -23,7 +23,7 @@ export const LayoutRenderer = createMiddleware<Env>(async (c, next) => {
               integrity="sha384-ujb1lZYygJmzgSwoxRggbCHcjc0rB2XoQrxeTUQyRjrOnlCoYta87iKBWq3EsdM2"
               crossorigin="anonymous"
             ></script>
-            <link rel="stylesheet" href="styles/style.css" />
+            <link rel="stylesheet" href="/styles/style.css" />
           </head>
           <body>
             <main id="root">

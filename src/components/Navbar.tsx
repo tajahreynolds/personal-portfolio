@@ -11,8 +11,15 @@ export default function Navbar() {
         <NavIcon
           href="https://linkedin.com/in/tajahreynolds"
           icon={linkedinIcon}
-          />
-        <h2 style="margin: 0">TaJah Reynolds</h2>
+        />
+        <h2
+          style="margin: 0; cursor: pointer;"
+          hx-get="/"
+          hx-target="#root"
+          hx-push-url="true"
+        >
+          TaJah Reynolds
+        </h2>
         <NavIcon href="https://github.com/tajahreynolds" icon={githubIcon} />
       </nav>
     </div>
