@@ -1,24 +1,31 @@
 body {
     margin: 0;
-    font-family: "Montserrat", "Raleway", Arial, sans-serif
+    font-family: "Montserrat", "Raleway", Arial, sans-serif;
 }
 
 #navContainer {
-  background-color: #0d0222;
+    background-color: #0d0222;
 }
 
 nav {
-  color: white;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 4px 4px 2px;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 4px 4px 2px;
+}
+
+nav > a {
+    text-decoration: none;
+    color: white;
+    cursor: pointer;
 }
 
 .hero {
     display: flex;
     flex-direction: column;
     align-items: center;
+    height: 80rem;
 }
 
 #projects {
